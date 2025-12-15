@@ -21,49 +21,43 @@
         <a href="{{ route('artikel') }}">Artikel</a>
         <a href="{{ route('galeri') }}">Galeri</a>
         <a href="{{ route('map') }}">Map</a>
+        <a href="{{ route('login') }}">Login</a>
       </div>
     </nav>
 
-    <section id="produk1">
-      <div class="produk-logo">
-        <h2>G A L E R I</h2>
+    <div class="page-shell" id="galeri">
+      <div class="page-hero page-hero--gallery">
+        <div class="page-hero__content">
+          <p class="eyebrow">Galeri</p>
+          <h2>Potret Gudeg Mbok Lindu</h2>
+          <p class="lead">Suasana warung, plating, dan momen hangat pelanggan.</p>
+        </div>
+        <div class="page-hero__image">
+          <img src="{{ asset('img/jumbotron1.jpeg') }}" alt="">
+        </div>
       </div>
 
-      <div class="pro-container">
-        <div class="pro">
-          <img src="{{ asset('img/jumbotron2.jpeg') }}" alt="" />
-        </div>
-
-        <div class="pro">
-          <img src="{{ asset('img/jumbotron1.jpeg') }}" alt="" />
-        </div>
-
-        <div class="pro">
-          <img src="{{ asset('img/galeri3.png') }}" alt="" />
-        </div>
-
-        <div class="pro">
-          <img src="{{ asset('img/jumbotron3.jpeg') }}" alt="" />
-        </div>
-
-        <div class="pro">
-          <img src="{{ asset('img/galeri5.png') }}" alt="" />
-        </div>
-
-        <div class="pro">
-          <img src="{{ asset('img/galeri2.png') }}" alt="" />
-        </div>
-
-        <div class="pro">
-          <img src="{{ asset('img/galeri1.png') }}" alt="" />
-        </div>
-
-        <div class="pro">
-          <img src="{{ asset('img/galeri4.png') }}" alt="" />
-        </div>
-
+      <div class="section-heading">
+        <h3>Album</h3>
+        <p class="muted">Lihat koleksi foto terbaru.</p>
       </div>
-    </section>
+
+      <div class="gallery-grid">
+        @forelse ($items as $item)
+          <div class="gallery-card">
+            <img src="{{ $item->image_path ? asset('storage/'.$item->image_path) : asset('img/jumbotron2.jpeg') }}" alt="{{ $item->title }}" />
+            <div class="gallery-card__body">
+              <h4>{{ $item->title }}</h4>
+              @if ($item->description)
+                <p>{{ $item->description }}</p>
+              @endif
+            </div>
+          </div>
+        @empty
+          <p class="muted" style="text-align:center; width:100%;">Belum ada galeri.</p>
+        @endforelse
+      </div>
+    </div>
 
     <footer>
       <div class="footer-dark">

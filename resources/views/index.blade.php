@@ -28,6 +28,7 @@
         <a href="{{ route('artikel') }}">Artikel</a>
         <a href="{{ route('galeri') }}">Galeri</a>
         <a href="{{ route('map') }}">Map</a>
+        <a href="{{ route('login') }}">Login</a>
       </div>
     </nav>
 
@@ -36,7 +37,7 @@
       <div class="main-hero">
         <div class="hero-content-img">
           <div class="hero-img">
-            <img src="img/heroo.png" alt="" />
+            <img src="{{ asset('img/heroo.png') }}" alt="" />
           </div>
         </div>
 
@@ -72,46 +73,21 @@
         <h1>Menu<span>Gudeg </span>Mbok Lindu</h1>
 
       <div class="menu-box">
+        @forelse ($menuItems as $item)
         <div class="menu-card">
           <div class="menu-image">
-              <img src="img/gudeg1.jpg" alt="" />
+              <img src="{{ $item->image_path ? asset('storage/'.$item->image_path) : asset('img/gudeg1.jpg') }}" alt="{{ $item->name }}" />
           </div>
-
-
 
           <div class="menu-info">
-            <h2>Ayam Bacem</h2>
-            <p>Ayam bacem pada gudeg adalah potongan ayam dimasak dalam bumbu gudeg khas Yogyakarta. Proses memasaknya melibatkan rendaman dalam kecap manis, gula merah, dan rempah-rempah, menghasilkan rasa gurih, manis, dan lembut. Ayam bacem menjadi pelengkap sempurna untuk hidangan gudeg yang lezat dan tradisional.</p>
-            <h3>Rp.25.000</h3>
+            <h2>{{ $item->name }}</h2>
+            <p>{{ $item->description }}</p>
+            <h3>Rp.{{ number_format($item->price, 0, ',', '.') }}</h3>
           </div>
         </div>
-
-        <div class="menu-card">
-          <div class="menu-image">
-              <img src="img/gudeg2.jpg" alt="" />
-          </div>
-
-
-
-          <div class="menu-info">
-            <h2>Tahu Bacem</h2>
-            <p>Tahu bacem pada gudeg merupakan tahu goreng yang direndam dalam bumbu gudeg khas Yogyakarta. Proses ini menghasilkan tahu yang lezat dengan kombinasi cita rasa gurih, manis, dan rempah-rempah. Tahu yang direbus dalam bumbu gudeg memberikan tambahan rasa yang khas dan tekstur yang lembut, menyatu harmonis dengan hidangan gudeg yang nikmat.</p>
-            <h3>Rp.15.000</h3>
-          </div>
-        </div>
-        <div class="menu-card">
-          <div class="menu-image">
-              <img src="img/krecek.jpg" alt="" />
-          </div>
-
-
-
-          <div class="menu-info">
-            <h2>Sambal Krecek</h2>
-            <p>Sambal krecek pada gudeg adalah saus pedas yang terbuat dari krecek (kulit sapi) yang dimasak dengan bumbu khas. Sambal ini menambah cita rasa gurih dan pedas pada hidangan gudeg, menciptakan harmoni rasa yang menggugah selera.</p>
-            <h3>Rp.10.000</h3>
-          </div>
-        </div>
+        @empty
+        <p style="text-align: center; width: 100%;">Menu belum tersedia.</p>
+        @endforelse
       </div>
     </div>
 

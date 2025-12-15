@@ -19,59 +19,53 @@
         <a href="{{ route('artikel') }}">Artikel</a>
         <a href="{{ route('galeri') }}">Galeri</a>
         <a href="{{ route('map') }}">Map</a>
+        <a href="{{ route('login') }}">Login</a>
       </div>
     </nav>
 
-    <div class="content" id="artikel">
-      <div class="content-logo">
-        <h2>A R T I K E L</h2>
+    <div class="page-shell" id="artikel">
+      <div class="page-hero">
+        <div class="page-hero__content">
+          <p class="eyebrow">Kabar Terbaru</p>
+          <h2>Artikel Gudeg Mbok Lindu</h2>
+          <p class="lead">Cerita, tips, dan kisah di balik rasa manis-gurih khas Yogyakarta.</p>
+        </div>
+        <div class="page-hero__image">
+          <img src="{{ asset('img/jumbotron2.jpeg') }}" alt="">
+        </div>
       </div>
 
+      <div class="section-heading">
+        <h3>Semua Artikel</h3>
+        <p class="muted">Urut terbaru dan terkurasi.</p>
+      </div>
+
+      <div class="article-grid">
+        @forelse ($articles as $article)
+          <article class="article-card">
+            <div class="article-card__media">
+              @if ($article->image_path)
+                <img src="{{ asset('storage/'.$article->image_path) }}" alt="{{ $article->title }}">
+              @else
+                <div class="article-card__placeholder">Gudeg</div>
+              @endif
+            </div>
+            <div class="article-card__body">
+              <div class="article-card__meta">
+                <span class="chip">Gudeg Story</span>
+                @if ($article->published_at)
+                  <span class="muted">{{ $article->published_at->format('d M Y') }}</span>
+                @endif
+              </div>
+              <h4>{{ $article->title }}</h4>
+              <p>{{ $article->body }}</p>
+            </div>
+          </article>
+        @empty
+          <p class="muted">Belum ada artikel.</p>
+        @endforelse
+      </div>
     </div>
-
-    <!-- artikel -->
-    <section class="about">
-      <div class="main-about">
-
-        <div class="about-content">
-          <div class="about-inner-content">
-            <img src="{{ asset('img/jumbotron2.jpeg') }}" alt="" />
-          </div>
-        </div>
-
-        <div class="about-content">
-          <div class="about-inner-content">
-            <div class="about-text">
-              <p>
-                Gudeg Mbok Lindu adalah salah satu hidangan khas Yogyakarta yang telah menjadi warisan kuliner leluhur. Mbok Lindu, sebagai penjual gudeg yang legendaris, telah menjaga tradisi kuliner ini selama beberapa generasi. Gudeg
-                sendiri adalah masakan yang terbuat dari nangka muda yang dimasak dalam kuah santan dengan rempah-rempah khas Jawa. Mbok Lindu menjadikan gudegnya istimewa dengan racikan bumbu rahasia turun temurun, menciptakan cita rasa
-                yang unik dan tak terlupakan.
-              </p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="main-about">
-        <div class="about-content">
-          <div class="about-inner-content">
-            <div class="about-text">
-              <p>
-                Rasa gudeg Mbok Lindu begitu khas dan otentik, menggambarkan kearifan lokal dan kecintaan pada tradisi kuliner Jawa. Selain nangka muda, dalam hidangannya terdapat telur, ayam, serta sambal krecek yang menambah kompleksitas
-                rasa. Kelezatan gudeg Mbok Lindu tidak hanya terletak pada rasa yang lezat, tetapi juga pada atmosfer tradisional yang tercipta di sekitar tempat makan. Pengunjung dapat merasakan sentuhan sejarah dan kehangatan kehidupan
-                kota Yogyakarta yang membumi.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="about-content">
-          <div class="about-inner-content">
-              <img src="{{ asset('img/artikel.png') }}" alt="" />
-          </div>
-        </div>
-      </div>
-    </section>
 
     <footer>
       <div class="footer-dark">
