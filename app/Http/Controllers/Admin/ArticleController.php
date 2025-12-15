@@ -13,8 +13,7 @@ class ArticleController extends Controller
 {
     public function index(): View
     {
-        $articles = Article::orderBy('display_order')
-            ->orderByDesc('published_at')
+        $articles = Article::orderByDesc('published_at')
             ->get();
 
         return view('admin.articles.index', compact('articles'));
@@ -51,7 +50,7 @@ class ArticleController extends Controller
     {
         $data = $this->validated($request, true);
 
-        $data['is_active'] = $request->boolean('is_active', $article->is_active);
+        $data['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('image')) {
             if ($article->image_path) {
@@ -84,7 +83,7 @@ class ArticleController extends Controller
             'image' => [$isUpdate ? 'sometimes' : 'nullable', 'image', 'max:2048'],
             'is_active' => ['sometimes', 'boolean'],
             'published_at' => ['sometimes', 'nullable', 'date'],
-            'display_order' => ['sometimes', 'integer', 'min:0'],
+            // display_order disabled
         ]);
     }
 }

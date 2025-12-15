@@ -11,7 +11,6 @@ class GalleryPageController extends Controller
     {
         $items = GalleryItem::query()
             ->where('is_active', true)
-            ->orderBy('display_order')
             ->orderBy('title')
             ->get();
 

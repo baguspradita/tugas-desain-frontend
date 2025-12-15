@@ -26,9 +26,6 @@
                 <small>Gambar sekarang: {{ $item->image_path }}</small>
             @endif
 
-            <label style="margin-top:10px;">Urutan</label>
-            <input type="number" name="display_order" min="0" value="{{ old('display_order', $item->display_order) }}">
-
             <label style="margin-top:10px; display:flex; align-items:center; gap:8px;">
                 <input type="checkbox" name="is_active" value="1" {{ old('is_active', $item->is_active) ? 'checked' : '' }}> Aktif
             </label>

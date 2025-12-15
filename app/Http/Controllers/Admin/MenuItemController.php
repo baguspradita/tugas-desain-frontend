@@ -13,8 +13,7 @@ class MenuItemController extends Controller
 {
     public function index(): View
     {
-        $items = MenuItem::orderBy('display_order')
-            ->orderBy('name')
+        $items = MenuItem::orderBy('name')
             ->get();
 
         return view('admin.menu.index', compact('items'));
@@ -51,7 +50,7 @@ class MenuItemController extends Controller
     {
         $data = $this->validated($request, true);
 
-        $data['is_active'] = $request->boolean('is_active', $menu_item->is_active);
+        $data['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('image')) {
             if ($menu_item->image_path) {
@@ -84,7 +83,7 @@ class MenuItemController extends Controller
             'price' => [$isUpdate ? 'sometimes' : 'required', 'numeric', 'min:0'],
             'image' => [$isUpdate ? 'sometimes' : 'nullable', 'image', 'max:2048'],
             'is_active' => ['sometimes', 'boolean'],
-            'display_order' => ['sometimes', 'integer', 'min:0'],
+            // display_order disabled
         ]);
     }
 }

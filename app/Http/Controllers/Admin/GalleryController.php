@@ -13,8 +13,7 @@ class GalleryController extends Controller
 {
     public function index(): View
     {
-        $items = GalleryItem::orderBy('display_order')
-            ->orderBy('title')
+        $items = GalleryItem::orderBy('title')
             ->get();
 
         return view('admin.galleries.index', compact('items'));
@@ -51,7 +50,7 @@ class GalleryController extends Controller
     {
         $data = $this->validated($request, true);
 
-        $data['is_active'] = $request->boolean('is_active', $gallery->is_active);
+        $data['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('image')) {
             if ($gallery->image_path) {
@@ -83,7 +82,7 @@ class GalleryController extends Controller
             'description' => ['sometimes', 'nullable', 'string'],
             'image' => [$isUpdate ? 'sometimes' : 'nullable', 'image', 'max:2048'],
             'is_active' => ['sometimes', 'boolean'],
-            'display_order' => ['sometimes', 'integer', 'min:0'],
+            // display_order disabled
         ]);
     }
 }

@@ -23,9 +23,6 @@
                     <label style="margin-top:10px;">Tanggal Publikasi</label>
                     <input type="datetime-local" name="published_at" value="{{ old('published_at') }}">
 
-                    <label style="margin-top:10px;">Urutan</label>
-                    <input type="number" name="display_order" min="0" value="{{ old('display_order', 0) }}">
-
                     <label style="margin-top:10px; display:flex; align-items:center; gap:8px;">
                         <input type="checkbox" name="is_active" value="1" {{ old('is_active', true) ? 'checked' : '' }}> Aktif
                     </label>

@@ -20,9 +20,6 @@
                     <label style="margin-top:10px;">Gambar</label>
                     <input type="file" name="image" accept="image/*">
 
-                    <label style="margin-top:10px;">Urutan</label>
-                    <input type="number" name="display_order" min="0" value="{{ old('display_order', 0) }}">
-
                     <label style="margin-top:10px; display:flex; align-items:center; gap:8px;">
                         <input type="checkbox" name="is_active" value="1" {{ old('is_active', true) ? 'checked' : '' }}> Aktif
                     </label>
@@ -40,7 +37,6 @@
                         <tr>
                             <th>Judul</th>
                             <th>Aktif</th>
-                            <th>Urutan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -49,7 +45,6 @@
                             <tr>
                                 <td>{{ $item->title }}</td>
                                 <td>{{ $item->is_active ? 'Ya' : 'Tidak' }}</td>
-                                <td>{{ $item->display_order }}</td>
                                 <td>
                                     <a class="btn btn-secondary" href="{{ route('admin.galleries.edit', $item) }}">Edit</a>
                                     <form class="inline" method="POST" action="{{ route('admin.galleries.destroy', $item) }}" onsubmit="return confirm('Hapus galeri ini?');">

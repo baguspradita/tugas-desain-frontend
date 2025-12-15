@@ -11,8 +11,7 @@ class HomeController extends Controller
     {
         $menuItems = MenuItem::query()
             ->where('is_active', true)
-            ->orderBy('display_order')
-            ->orderBy('name')
+            ->latest()
             ->get();
 
         return view('index', compact('menuItems'));

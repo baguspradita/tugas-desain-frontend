@@ -11,8 +11,8 @@ class ArticlePageController extends Controller
     {
         $articles = Article::query()
             ->where('is_active', true)
-            ->orderBy('display_order')
             ->orderByDesc('published_at')
+            ->latest()
             ->get();
 
         return view('artikel', compact('articles'));
